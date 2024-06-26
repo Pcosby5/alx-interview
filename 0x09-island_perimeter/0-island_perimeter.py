@@ -1,10 +1,20 @@
 #!/usr/bin/python3
 """
-Function to calculate the perimeter of an island in a grid
+Module to calculate the perimeter of an island in a grid.
 """
 
 
 def island_perimeter(grid):
+    """
+    Returns the perimeter of the island described in grid.
+
+    Args:
+        grid (list of list of int): A 2D grid representing the map
+                                    where 0 is water and 1 is land.
+
+    Returns:
+        int: The perimeter of the island.
+    """
     perimeter = 0
     rows = len(grid)
     cols = len(grid[0])
