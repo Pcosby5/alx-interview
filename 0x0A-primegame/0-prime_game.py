@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 def isWinner(x, nums):
+    """Determine the winner after x rounds of the Prime Game."""
     if not nums or x < 1:
         return None  # If there are no rounds or the list is empty, return None
 
