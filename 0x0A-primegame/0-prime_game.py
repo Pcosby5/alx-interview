@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """0. Prime Game - Maria and Ben are playing a game"""
 
+
 def isWinner(x, nums):
     """Determines the winner after x rounds of the Prime Game.
 
@@ -9,7 +10,8 @@ def isWinner(x, nums):
         nums (list): List of integers for each round.
 
     Returns:
-        str: Name of the player that won the most rounds, or None if there's a tie.
+        str: Name of the player that
+        won the most rounds, or None if there's a tie.
     """
     if x <= 0 or nums is None:
         return None
@@ -39,6 +41,7 @@ def isWinner(x, nums):
         return "Maria"
     return None
 
+
 def rm_multiples(ls, x):
     """Removes multiples of primes from the list.
 
@@ -51,6 +54,7 @@ def rm_multiples(ls, x):
             ls[i * x] = 0
         except (ValueError, IndexError):
             break
+
 
 if __name__ == "__main__":
     # Test the function with the provided example
