@@ -1,41 +1,56 @@
 #!/usr/bin/python3
+"""0. Prime Game - Maria and Ben are playing a game"""
+
 def isWinner(x, nums):
-    """Determine the winner after x rounds of the Prime Game."""
-    if not nums or x < 1:
-        return None  # If there are no rounds or the list is empty, return None
+    """Determines the winner after x rounds of the Prime Game.
 
-    max_num = max(nums)  # Find the maximum number in the nums list
-    primes = [True] * (max_num + 1)  # Create a list to track prime numbers
-    primes[0] = primes[1] = False  # 0 and 1 are not prime numbers
+    Args:
+        x (int): Number of rounds.
+        nums (list): List of integers for each round.
 
-    # Use the Sieve of Eratosthenes to find all primes up to max_num
-    for i in range(2, int(max_num ** 0.5) + 1):
-        if primes[i]:
-            for j in range(i * i, max_num + 1, i):
-                primes[j] = False
+    Returns:
+        str: Name of the player that won the most rounds, or None if there's a tie.
+    """
+    if x <= 0 or nums is None:
+        return None
+    if x != len(nums):
+        return None
 
-    # Helper function to count the number of primes up to n
-    def count_prime_set_bits(n):
-        return sum(primes[:n + 1])
+    ben = 0
+    maria = 0
 
-    maria_wins = 0
-    ben_wins = 0
+    # Create a list to determine prime numbers up to the maximum number in nums
+    a = [1 for _ in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0  # 0 and 1 are not prime numbers
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
 
-    # For each round, determine the winner
-    for num in nums:
-        if count_prime_set_bits(num) % 2 == 0:
-            ben_wins += 1  # Ben wins if the count of primes is even
+    # Determine the winner for each round
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
         else:
-            maria_wins += 1  # Maria wins if the count of primes is odd
+            maria += 1
 
-    # Determine the overall winner based on who won the most rounds
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
+    # Determine the overall winner
+    if ben > maria:
         return "Ben"
-    else:
-        return None  # Return None if it's a tie
+    if maria > ben:
+        return "Maria"
+    return None
 
+def rm_multiples(ls, x):
+    """Removes multiples of primes from the list.
+
+    Args:
+        ls (list): List indicating prime numbers.
+        x (int): Current prime number to remove multiples of.
+    """
+    for i in range(2, len(ls)):
+        try:
+            ls[i * x] = 0
+        except (ValueError, IndexError):
+            break
 
 if __name__ == "__main__":
     # Test the function with the provided example

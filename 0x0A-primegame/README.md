@@ -1,4 +1,3 @@
-0-prime_game.py
 # Prime Game
 
 ## Description
